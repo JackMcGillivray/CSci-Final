@@ -12,7 +12,7 @@ public class FinishLine {
 
   public FinishLine(Track track) {
     try {
-      finishPicture = ImageIO.read(new File("Finish.png"));
+      finishPicture = ImageIO.read(new File("images/Finish.png"));
     } catch (IOException e) {}
     this.track = track;
     x = 400;

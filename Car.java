@@ -24,7 +24,7 @@ private Rectangle[] ary = {
 
   public Car(Track track, Border boarder) {
     try {
-      carPicture = ImageIO.read(new File("car.png"));
+      carPicture = ImageIO.read(new File("images/car.png"));
     } catch (IOException e) {}
     throttle = 1;
     this.track = track;
