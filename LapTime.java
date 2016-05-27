@@ -8,16 +8,18 @@ public class LapTime {
 
   private Track track;
   private Car car;
+  private Car2 car2;
   private FinishLine finishLine;
   private long startTime;
   private double currentTime;
   private final Font smallFont = new Font ("Times New Roman", 1, 12);
   private final Font bigFont = new Font ("Times New Roman", 1, 18);
 
-  public LapTime(Track track, Car car, FinishLine finishLine) {
+  public LapTime(Track track, Car car, Car2 car2, FinishLine finishLine) {
     this.track = track;
     this.car = car;
     this.finishLine = finishLine;
+    this.car2 = car2;
   }
 
   public void paint(Graphics g, Graphics2D g2d) {
@@ -26,12 +28,17 @@ public class LapTime {
     g.setFont(smallFont);
     g.drawString("Time:", 500, 15);
     g.setFont(bigFont);
-    if (collision() && getCurrentTime() > 4) {
+    if (collision() == 1 && getCurrentTime() > 4) {
       JOptionPane.showMessageDialog(null,
-                  "Your time was: "+Double.toString(currentTime));
+                  "Player 1 Wins!!!");
       track.seeYa();
     }
-    if (this.collision())
+    if (collision() == 2 && getCurrentTime() > 4) {
+      JOptionPane.showMessageDialog(null,
+                  "Player 2 Wins!!! ");
+      track.seeYa();
+    }
+    if (this.collision()!= 0)
       setStartTime();
     if (car.collision())
       startTime = 0;
@@ -55,8 +62,12 @@ public class LapTime {
     startTime = System.currentTimeMillis();
   }
 
-  private boolean collision() {
-    return car.getBounds().intersects(finishLine.getBounds());
+  private int collision() {
+    if (car.getBounds().intersects(finishLine.getBounds()))
+      return 1;
+    if (car2.getBounds().intersects(finishLine.getBounds()))
+      return 2;
+    return 0;
   }
 
 
